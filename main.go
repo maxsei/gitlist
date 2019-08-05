@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -102,7 +103,7 @@ func main() {
 		defer greader.Close()
 		// decode into page and append to all repositories
 		var page []GitHubResponse
-		err = json.NewDecoder(greader).Decode(page)
+		err = json.NewDecoder(greader).Decode(&page)
 		if err != nil {
 			log.Fatalf("decoding json: %v\n", err)
 		}
@@ -119,6 +120,11 @@ func main() {
 		log.Fatalf("opening file: %v\n", err)
 	}
 	defer file.Close()
+	var repobytes []byte
+	for _, repo := range repositories {
+		repobytes = append(repobytes, []byte(repo.HTMLURL+"\n")...)
+	}
+	io.Copy(file, bytes.NewBuffer(repobytes))
 	/* IO */
 }
 
@@ -126,7 +132,9 @@ func main() {
 // that is specified if the condition is not met
 func checkFlag(boolean bool, errmsg error) {
 	if !boolean {
-		log.Fatalf("%v\n%s\n", errmsg, flag.Usage)
+		fmt.Fprintf(os.Stderr, "%v\n", errmsg)
+		flag.Usage()
+		os.Exit(1)
 	}
 }
 
