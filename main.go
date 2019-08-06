@@ -21,24 +21,6 @@ const (
 )
 
 func main() {
-	/*
-		[maximillian@ThinkPadT440 gitlist]$ ./gitlist
-		username required
-		Usage of ./gitlist:
-		  -m int
-		        maximum number of queries (default -1) (default -1)
-		  -o string
-		        outfilename (default repos.txt) (default "repos.txt")
-		  -p string
-		        password (required)(not stored)
-		  -pp int
-		        pagination; results per page (default 10) (default 10)
-		  -t int
-		        maxlatency on failed request ( default 3s ) (default 3)
-		  -u string
-		        username (required)
-	*/
-
 	/* FLAG */
 	maxqueries := flag.Int("m", -1, "maximum number of queries")
 	outfilename := flag.String("o", "repos.txt", "name of the outfile")
@@ -122,6 +104,9 @@ func main() {
 	defer file.Close()
 	var repobytes []byte
 	for _, repo := range repositories {
+		if repo.Owner.Login != *username {
+			continue
+		}
 		repobytes = append(repobytes, []byte(repo.HTMLURL+"\n")...)
 	}
 	io.Copy(file, bytes.NewBuffer(repobytes))
