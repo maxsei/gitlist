@@ -1,8 +1,7 @@
 # Maxsei's Gitlist  
   
-This simle program is designed to list all of the repositories owned by a user.  
-I am not completely sure that all of the queries done cannot overlap with other  
-users yet i.e. max overlaps maxsei's repositories.  
+This is a simple program is designed to list all of the repositories owned by a  
+user.  
   
 ## Installation  
   
