@@ -62,7 +62,7 @@ func main() {
 		}
 		// echo the page grabbed
 		if *echo {
-			fmt.Printf("getting page %d", i)
+			fmt.Printf("getting pages [%d, %d]\n", i, i+*pagination)
 		}
 		resp, err := client.Do(req)
 		if err != nil {
