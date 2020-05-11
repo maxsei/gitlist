@@ -3,11 +3,6 @@
 This is a simple program is designed to list all of the repositories owned by a  
 user.  
   
-## Installation  
-  
-1. This requries you have [ Go ](https://github.com/golang/go) installed with `$` `GOPATH` [ set up ] (https://github.com/golang/go/wiki/SettingGOPATH)  
-2. Once Go is installed just do `$` `go install https://github.com/maxsei/gitlist`  
-3. You should be able to now call `$` `gitlist` from anywhere in your terminal  
   
 ## USAGE:  
 Usage of gitlist:  
